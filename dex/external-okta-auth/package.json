@@ -23,7 +23,7 @@
     "webdriver-update-2.45": "webdriver-manager update --versions.standalone=3.141.59 --versions.chrome 2.45 --gecko false && node scripts/setup-env.js"
   },
   "devDependencies": {
-    "dotenv": "^5.0.1",
+    "dotenv": "^10.0.0",
     "find-process": "^1.1.0",
     "forever-monitor": "1.7.1",
     "jasmine": "^3.0.0",
