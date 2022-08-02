@@ -63,9 +63,7 @@ def string_to_level(log_level):
         return logging.WARNING
     if log_level == "INFO":
         return logging.INFO
-    if log_level == "DEBUG":
-        return logging.DEBUG
-    return logging.NOTSET
+    return logging.DEBUG if log_level == "DEBUG" else logging.NOTSET
 
 
 if __name__ == "__main__":
