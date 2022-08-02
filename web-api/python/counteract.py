@@ -30,7 +30,7 @@ import urllib.request
 CTIP = "10.80.100.149"  # CounterACT IP
 CTPWSTRING = "username={username}&password=4Scout123"  # Creds for WS-API
 
-base_url = "https://" + CTIP + "/api"
+base_url = f"https://{CTIP}/api"
 headers = {
     'Content-Type': "application/x-www-form-urlencoded",
     'charset': 'utf-8',
@@ -47,7 +47,7 @@ ctx.verify_mode = ssl.CERT_NONE
 
 # Return JWT from Counteract
 def getToken():
-    launch_url = base_url + "/login"
+    launch_url = f"{base_url}/login"
     payload = CTPWSTRING
 
     try:
@@ -56,37 +56,35 @@ def getToken():
         return(resp.read().decode("utf-8"))
 
     except Exception as err:
-        print("getToken() ERROR: " + str(err))
+        print(f"getToken() ERROR: {str(err)}")
 
 
 # Pull all hosts from CounterACT
 def getHosts(token):
-    launch_url = base_url + "/hosts"
+    launch_url = f"{base_url}/hosts"
     headers["Authorization"] = token
 
     try:
         request = urllib.request.Request(launch_url, headers=headers)
         resp = urllib.request.urlopen(request, context=ctx)
-        request_response = json.loads(resp.read())
-        return(request_response)
+        return json.loads(resp.read())
 
     except Exception as err:
-        print("getHosts() ERROR:" + str(err))
+        print(f"getHosts() ERROR:{str(err)}")
 
 
 # Pull all policies from CounterACT
 def getPolicies(token):
-    launch_url = base_url + "/policies"
+    launch_url = f"{base_url}/policies"
     headers["Authorization"] = token
 
     try:
         request = urllib.request.Request(launch_url, headers=headers)
         resp = urllib.request.urlopen(request, context=ctx)
-        request_response = json.loads(resp.read())
-        return(request_response)
+        return json.loads(resp.read())
 
     except Exception as err:
-        print("getPolicies() ERROR:" + str(err))
+        print(f"getPolicies() ERROR:{str(err)}")
 
 
 # Find policy ID with policy name
@@ -103,29 +101,27 @@ def getPoliciesMainID(token, policyname):
 
 # Get all Host fields
 def getHostFields(token):
-    launch_url = base_url + "/hostfields"
+    launch_url = f"{base_url}/hostfields"
     headers["Authorization"] = token
 
     try:
         request = urllib.request.Request(launch_url, headers=headers)
         resp = urllib.request.urlopen(request, context=ctx)
-        request_response = json.loads(resp.read())
-        return(request_response)
+        return json.loads(resp.read())
 
     except Exception as err:
-        print("getPolicies() ERROR:" + str(err))
+        print(f"getPolicies() ERROR:{str(err)}")
 
 
 # Get all properites for a host
 def getHostProps(token, ip):
-    launch_url = base_url + "/hosts/ip/" + ip
+    launch_url = f"{base_url}/hosts/ip/{ip}"
     headers["Authorization"] = token
 
     try:
         request = urllib.request.Request(launch_url, headers=headers)
         resp = urllib.request.urlopen(request, context=ctx)
-        request_response = json.loads(resp.read())
-        return(request_response)
+        return json.loads(resp.read())
 
     except Exception as err:
-        print("getPolicies() ERROR:" + str(err))
+        print(f"getPolicies() ERROR:{str(err)}")
